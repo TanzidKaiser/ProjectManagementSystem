@@ -1,9 +1,10 @@
-# ProjectManagementSystem
+# Project Management System
 
-Use Code First please insert User Name And Password  For IT Expert  derectlly in Sql server Database User Table 
-Then login for It Expert 
+Useing  Code First,  please insert User Name And Password  For IT Admin  derectlly in Sql server Database to User_tbl 
+Then login for IT Expert 
+
 Must Insert Email,Password and Designation
 
 Like : Email: tanzid@gmail.com
-       Pass: 123
-	   Designation: IT Admin(Fixed)
+          Pass: 123
+         Designation: IT Admin(Fixed)
