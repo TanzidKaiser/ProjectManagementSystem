@@ -90,7 +90,8 @@
             <li>@Html.ActionLink("Assign Resource Person", "Index", "AssignProject")</li>            
             <li>@Html.ActionLink("View Project", "Index", "ViewProject", new { UserId = @HttpContext.Current.User.Identity.Name }, null)</li>
             <li>@Html.ActionLink("Add/Update Task", "Index", "Task")</li>
-            <li>@Html.ActionLink("Add Comment", "CommentCreate", "Comment")</li>            
+            <li>@Html.ActionLink("Add Comment", "CommentCreate", "Comment")</li>
+            <li>@Html.ActionLink("View Comment", "ViewComments", "Comment")</li>            
             
         </ul>
     </div>

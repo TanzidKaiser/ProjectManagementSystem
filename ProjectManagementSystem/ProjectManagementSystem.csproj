@@ -263,6 +263,7 @@
     <Content Include="Views\ViewProject\Index.cshtml" />
     <Content Include="Views\ViewProject\ProjectDetails.cshtml" />
     <Content Include="Views\Login\page.cshtml" />
+    <Content Include="Views\Comment\ViewComments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

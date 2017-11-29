@@ -17,6 +17,7 @@ namespace ProjectManagementSystem.Controllers
 
             return View();
         }
+        [Authorize(Roles = "Developer,Project Manager,Team Lead, QA Engineer,UX Engineer")]
         [HttpPost]
         public ActionResult CommentCreate(Comment model, string UserID)
         {
@@ -58,6 +59,22 @@ namespace ProjectManagementSystem.Controllers
             return View();
 
         }
+        [Authorize(Roles = "Developer,Project Manager,Team Lead, QA Engineer,UX Engineer")]
+        public ActionResult ViewComments()
+        {
+            ViewBag.projectList = db.Project.ToList();
+            return View();
+        }
+        [Authorize(Roles = "Developer,Project Manager,Team Lead, QA Engineer,UX Engineer")]
+        [HttpPost]
+        public ActionResult ViewComments(Task model)
+        {
+            var comments = db.Comment.Where(p => p.ProjectID == model.ProjectID && p.TaskID == model.TaskID).ToList();
+            ViewBag.project = db.Project.ToList();
+            return View(comments);
+        }
+
+
         public JsonResult GetTaskByProjectID(int ProjectID)
         {
             var Tasks = db.Task.Where(p => p.ProjectID == ProjectID).ToList();

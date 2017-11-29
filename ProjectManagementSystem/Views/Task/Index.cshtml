@@ -82,7 +82,7 @@
                                 @Html.ValidationSummary(true)
                                 <fieldset id="TaskForm">
                                     <input data-val="true" id="UserID" name="UserID" value="@UserId" type="hidden">
-
+                                    <input data-val="true" id="TaskID" name="TaskID"  type="hidden">
                                     <div class="control-group">
                                         <label class="control-label">Select Project</label>
                                         <div class="controls">
@@ -99,7 +99,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Assign To</label>
                                         <div class="controls">
-                                            @Html.DropDownList("UserID", new SelectList(string.Empty, "Value", "Text"), "Select Resource", new { @id = "UserID" })
+                                            @Html.DropDownList("UserID", new SelectList(string.Empty, "Value", "Text"), "Select Resource", new { @id = "UserIDForTask" })
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -240,12 +240,18 @@
     </div>
 </div>
 @section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(document).ready(function () {
 
             $("#updateBtn").click(function () {
-                var k = Validation();
-                if (k == true) {
+
+                if ($("#ProjectID").val() == "" || $("#ProjectID").val() == "0") {
+
+                    alert("Please Select Project Name And Resource");
+
+                }
+                else {
                     var data = $("#TaskForm").serialize();
                     $.ajax({
                         type: "Post",
@@ -268,28 +274,8 @@
             })
             //window.location.href = "/Task/Index";
         })
-        function Validation() {
-            if ( $("#ProjectID").val() == "0") {
-                alert("Please Select Project Name");
-                return false;
-            }
-            else if ($("#UserID").val() == "0") {
-                alert("Please Select User Name");
-                return false;
-            }
-            //else if ($("#TaskDescription").val() == "") {
-            //    alert("Please write Task Discription");
-            //    return false;
-            //}
-            //else if ($("#TaskDueDate").val() == "") {
-            //    alert("Please Select Date");
-            //    return false;
-            //}
-            //else if ($("#Priority").val() == "") {
-            //    alert("Please Select Priority");
-            //    return false;
-            //}
-        };
+
+
     </script>
     <script type="text/javascript">
         function EditTask(id, num) {
@@ -303,8 +289,6 @@
                 success: function (result) {
 
                     $("#TaskID").val(result.ID);
-                    //$("#ProjectID").val(result.proID);
-                    //$("#UserID").val(result.UserID);
                     $("#TaskDescription").val(result.discription);
                     $("#TaskDueDate").val(result.date);
                     $("#Priority").val(result.priority);
@@ -355,7 +339,7 @@
             $("#ProjectID").change(function () {
 
                 var ID = $("#ProjectID").val();
-                var select = $("#UserID");
+                var select = $("#UserIDForTask");
                 select.empty();
                 $.ajax({
                     url: '/Task/GetResourceByProjectID',
