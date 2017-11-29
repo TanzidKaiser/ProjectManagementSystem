@@ -1,0 +1,338 @@
+﻿@model IEnumerable<ProjectManagementSystem.Models.User>
+@{
+    ViewBag.Title = "UserCreate";
+}
+<style>
+    #levelWidth {
+        width: 129px;
+        font-size: 11px;
+        font-weight: bold;
+        color: #dc7e1b;
+    }
+
+    #ProductSearch {
+        width: 170px;
+        font-size: 15px;
+        height: 40px;
+    }
+
+    #inputMargin {
+        margin-left: 137px;
+    }
+
+    .table th {
+        font-size: 11px;
+        color: #08c;
+    }
+    /*table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }*/
+
+    table tbody td {
+        padding: 5px 10px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 11px;
+        color: #696c6f;
+    }
+
+    table td {
+        text-align: center;
+    }
+
+    input[type="checkbox"] {
+        margin: 0px 3px 0px;
+        /*margin-top: 1px \9;
+            line-height: normal;*/
+    }
+
+    #ColorForCheckboxLebel {
+        color: #08c;
+        font-weight: bold;
+        font-size: 11px;
+    }
+</style>
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="@Url.Action("Signout","Login")" style="color:red">Logout</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Add User</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true)
+                                <fieldset id="UserForm">
+                                    @*<input data-val="true" id="UserID" name="UserID" type="hidden">*@
+
+                                    <div class="control-group">
+
+                                        <label class="control-label">Name</label>
+                                        <div class="controls">
+                                            <input type="text" name="Name" id="Name" placeholder="User Name" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label">Email</label>
+                                        <div class="controls">
+                                            <input type="text" name="Email" id="Email" placeholder="User Email" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label">Password</label>
+                                        <div class="controls">
+                                            <input type="text" name="Password" id="Password" placeholder="User Password" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Status</label>
+                                        <div class="controls">
+                                            <label>
+                                                <input type="radio" id="Active" value="Active" name="Status" checked="checked" />
+                                                Active
+                                            </label>
+                                            <label>
+                                                <input type="radio" id="Inactive" value="Inactive" name="Status" />
+                                                Inactive
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                    <div class="controls">
+
+                                        <select id="Designation" name="Designation">
+                                            <option value="0">Select Designation</option>
+                                            @foreach (var a in ViewBag.designations)
+                                            {
+                                                <option value="@a.Id">@a.Name</option>
+                                            }
+
+                                        </select>
+                                    </div>
+                                    <br />
+                                    <div class="form-control">
+                                        <button type="submit" id="saveBtn" class="btn btn-success" style="margin:15px">Save</button>
+                                        <button type="button" id="updateBtn" class="btn btn-success" style="margin:15px">Update</button>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        }
+                    </div>
+                    @if (ViewBag.Msg == 1)
+                    {
+                        <div class="alert alert-success alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Error!</h4>
+                            <h5>Save Success</h5>
+                        </div>
+                    }
+                    @if (ViewBag.Msg == 2)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Error!</h4>
+                            <h5> Email Already Exist ! </h5>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+            <div class="span11">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>User List</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped" id="myTable">
+
+                            <thead>
+                                <tr>
+                                    <td style="font-size:medium">Name</td>
+                                    <td style="font-size:medium">Email</td>
+                                    <td style="font-size:medium">Designation</td>
+                                    <td style="font-size:medium">Status</td>
+                                    <td style="font-size:medium">Password</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var user in Model)
+                                {
+
+                                    <tr class="odd gradeX">
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => user.Name)
+
+                                        </td>
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => user.Email)
+
+                                        </td>
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => user.Designation)
+
+                                        </td>
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => user.Status)
+
+                                        </td>
+
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => user.Password)
+
+                                        </td>
+
+                                        <td>
+                                            <button type="button" id="editBtn" class="btn" onclick="EditUser(@user.UserID,this)">Edit</button> 
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        function EditUser(id, num) {
+            $("#Active").prop("checked", false);
+            $.ajax({
+
+                url: '/User/EditUser',
+                data: { UserId: id },
+                type: "post",
+                cache: false,
+                success: function (response) {
+
+                    $("#UserID").val(respond.ID);
+                    $("#Name").val(response.Name);
+                    $("#Email").val(response.Email);
+                    $("#Password").val(response.Password);
+                    //$("#Email").val(response.Email);
+
+                    if (response.Status == "Active") {
+                        $("#Active").prop("checked", true);
+                    }
+                    else if (response.Status == "Inactive") {
+                        $("#Inactive").prop("checked", true);
+                    }
+                    $("#Designation").val(response.DesId);
+                    //$("#availability option:selected").text();
+
+                    $("#saveBtn").hide();
+                    $("#updateBtn").show();
+
+
+                },
+
+
+            });
+
+        }
+    </script>
+    <script>
+        $("#updateBtn").click(function () {
+            var data = $("#UserForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/User/UpdateUser",
+                data: data,
+                success: function (result) {
+                    if (result == 1)
+                    {
+                        alert("Update Success");
+                    }
+                    else
+                    {
+                        alert("Exception Please try again");
+                    }
+                    
+                    window.location.href = "/User/UserCreate";
+
+
+                }
+            })
+        })
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#saveBtn").click(function () {
+
+                var name = $("#Name").val();
+                var email = $("#Email").val();
+                var pass = $("#Password").val();
+                //var designation = ("#Designation option:selected").val();
+
+                if (name == "") {
+                    alert("required User Name");
+                    return false;
+                }
+                if (email == "") {
+                    alert("required User email");
+                    return false;
+                }
+                if (pass == "") {
+                    alert("required Password");
+                    return false;
+                }
+                //if (designation == 0) {
+                //    alert("Select Designation");
+                //}
+            })
+            $("#updateBtn").hide();
+        })
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 3000);
+
+        });
+    </script>
+}

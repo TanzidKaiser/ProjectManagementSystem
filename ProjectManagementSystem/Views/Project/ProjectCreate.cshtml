@@ -1,0 +1,420 @@
+﻿@model IEnumerable<ProjectManagementSystem.Models.Project>
+@{
+    ViewBag.Title = "ProjectCreate";
+}
+
+<style>
+    #levelWidth {
+        width: 129px;
+        font-size: 11px;
+        font-weight: bold;
+        color: #dc7e1b;
+    }
+
+    #ProductSearch {
+        width: 170px;
+        font-size: 15px;
+        height: 40px;
+    }
+
+    #inputMargin {
+        margin-left: 137px;
+    }
+
+    .table th {
+        font-size: 11px;
+        color: #08c;
+    }
+    /*table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }*/
+
+    table tbody td {
+        padding: 5px 10px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 11px;
+        color: #696c6f;
+    }
+
+    table td {
+        text-align: center;
+    }
+
+    input[type="checkbox"] {
+        margin: 0px 3px 0px;
+        /*margin-top: 1px \9;
+            line-height: normal;*/
+    }
+
+    #ColorForCheckboxLebel {
+        color: #08c;
+        font-weight: bold;
+        font-size: 11px;
+    }
+</style>
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a><a href="@Url.Action("Signout","Login")" style="color:red">Logout</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Add Project</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        @using (Html.BeginForm(new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true)
+                                <fieldset id="ProjectForm">
+                                    <input data-val="true" id="ProjectID" name="ProjectID" type="hidden">
+
+                                    <div class="control-group">
+
+                                        <label class="control-label">Name</label>
+                                        <div class="controls">
+                                            <input type="text" name="ProjectName" id="ProjectName" placeholder="Project Name" />
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label">Code name</label>
+                                        <div class="controls">
+                                            <input type="text" name="ProjectCode" id="ProjectCode" placeholder="Project Code name" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label">Description</label>
+                                        <div class="controls">
+                                            <textarea name="Description" id="Description"></textarea>
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label">Possible Start Date</label>
+                                        <div class="controls">
+                                            <input type="date" name="ProjectStartDate" id="ProjectStartDate" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label">Possible End Date</label>
+                                        <div class="controls">
+                                            <input type="date" name="ProjectEndDate" id="ProjectEndDate" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label">Duration(In days)</label>
+                                        <div class="controls">
+                                            <input type="text" name="ProjectDurationDays" id="ProjectDurationDays" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label">Upload File</label>
+                                        <div class="controls">
+                                            <input type="file" id="file" name="file" />
+
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Status</label>
+                                        <div class="controls">
+                                            <label>
+                                                <input type="radio" id="NotStarted" value="Not Started" name="Status" checked="checked" />
+                                                Not Started
+                                            </label>
+                                            <label>
+                                                <input type="radio" id="Started" value="Started" name="Status" />
+                                                Started
+                                            </label>
+                                            <label>
+                                                <input type="radio" id="Completed" value="Completed" name="Status" />
+                                                Completed
+                                            </label>
+                                            <label>
+                                                <input type="radio" id="Cancelled" value="Cancelled" name="Status" />
+                                                Cancelled
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-control">
+                                        <button type="submit" id="saveBtn" class="btn btn-success" style="margin:15px">Save</button>
+                                        <button type="button" id="updateBtn" class="btn btn-success" style="margin:15px">Update</button>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        }
+                    </div>
+                    @if (ViewBag.Msg == 1)
+                    {
+                        <div class="alert alert-success alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Error!</h4>
+                            <h5>Save Success</h5>
+                        </div>
+                    }
+                    @if (ViewBag.Msg == 0)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Error!</h4>
+                            <h5> Project Doesn't save ! </h5>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+            <div class="span11">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Project List</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped" id="myTable">
+
+                            <thead>
+                                <tr>
+                                    <td style="font-size:medium">Name</td>
+                                    <td style="font-size:medium">Code Name</td>
+                                    <td style="font-size:medium">Description</td>
+                                    <td style="font-size:medium">Start Date</td>
+                                    <td style="font-size:medium">End Date</td>
+                                    @*<td style="font-size:medium">File Name</td>*@
+                                    <td style="font-size:medium">Status</td>
+
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var project in Model)
+                                {
+
+                                    <tr class="odd gradeX">
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => project.ProjectName)
+
+                                        </td>
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => project.ProjectCode)
+
+                                        </td>
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => project.Description)
+
+                                        </td>
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => project.ProjectStartDate)
+
+                                        </td>
+
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => project.ProjectEndDate)
+
+                                        </td>
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => project.Status)
+
+                                        </td>
+
+                                        <td>
+                                            <button type="button" id="editBtn" class="btn" onclick="EditProject(@project.ProjectID,this)">Edit</button>
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        function EditProject(id, num) {
+
+            $("#NotStarted").prop("checked", false);
+
+            $.ajax({
+
+                url: '/Project/EditProject',
+                data: { ProjectId: id },
+                type: "post",
+                cache: false,
+                success: function (response) {
+
+                    $("#ProjectID").val(response.ProjectID);
+                    $("#ProjectName").val(response.ProjectName);
+                    $("#ProjectCode").val(response.ProjectCode);
+                    $("#Description").val(response.Description);
+                    $("#ProjectStartDate").val(response.ProjectStartDate);
+                    $("#ProjectEndDate").val(response.ProjectEndDate);
+                    $("#ProjectDurationDays").val(response.ProjectDurationDays);
+
+                    if (response.Status == "NotStarted") {
+                        $("#NotStarted").prop("checked", true);
+                    }
+                    else if (response.Status == "Started") {
+                        $("#Started").prop("checked", true);
+                    }
+                    else if (response.Status == "Completed") {
+                        $("#Completed").prop("checked", true);
+                    }
+                    else if (response.Status == "Cancelled") {
+                        $("#Cancelled").prop("checked", true);
+                    }
+
+                    $("#saveBtn").hide();
+                    $("#updateBtn").show();
+
+
+                },
+
+
+            });
+
+        }
+    </script>
+    <script>
+        $("#updateBtn").click(function () {
+            var data = $("#ProjectForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/Project/UpdateProject",
+                data: data,
+                success: function (result) {
+                    if (result == 1) {
+                        alert("Update Success");
+                    }
+                    else {
+                        alert("Exception Please try again");
+                    }
+
+                    window.location.href = "/Project/ProjectCreate";
+
+
+                }
+            })
+        })
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 3000);
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#saveBtn").click(function () {
+
+                var name = $("#ProjectName").val();
+                var code = $("#ProjectCode").val();
+                var startDate = $("#ProjectStartDate").val();
+                var endDate = $("#ProjectEndDate").val();
+
+                if (name == "") {
+                    alert("required Project Name");
+                    return false;
+                }
+                if (code == "") {
+                    alert("required Code");
+                    return false;
+                }
+                if (startDate == "") {
+                    alert("required Start Date");
+                    return false;
+                }
+                if (endDate == "") {
+                    alert("required End Date");
+                    return false;
+                }
+
+            })
+            $("#updateBtn").hide();
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            $("#ProjectEndDate").change(function () {
+
+                var startDate = $("#ProjectStartDate").val();
+                var s_date = new Date(startDate);
+
+                var endDate = $("#ProjectEndDate").val();
+                var e_date = new Date(endDate);
+
+                var difference = new Date(e_date - s_date);
+                var durationDays = difference / 1000 / 60 / 60 / 24;
+
+                $("#ProjectDurationDays").val(durationDays);
+
+
+            });
+
+        })
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#ProjectEndDate").click(function () {
+
+                if ($("#ProjectStartDate").val() == "") {
+
+                    alert("first select Start Date");
+                }
+            })
+        })
+    </script>
+
+}

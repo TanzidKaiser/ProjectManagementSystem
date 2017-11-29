@@ -1,0 +1,401 @@
+﻿@model IEnumerable<ProjectManagementSystem.Models.Task>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var UserId = HttpContext.Current.User.Identity.Name;
+}
+
+<style>
+    #levelWidth {
+        width: 129px;
+        font-size: 11px;
+        font-weight: bold;
+        color: #dc7e1b;
+    }
+
+    #ProductSearch {
+        width: 170px;
+        font-size: 15px;
+        height: 40px;
+    }
+
+    #inputMargin {
+        margin-left: 137px;
+    }
+
+    .table th {
+        font-size: 11px;
+        color: #08c;
+    }
+    /*table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }*/
+
+    table tbody td {
+        padding: 5px 10px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 11px;
+        color: #696c6f;
+    }
+
+    table td {
+        text-align: center;
+    }
+
+    input[type="checkbox"] {
+        margin: 0px 3px 0px;
+        /*margin-top: 1px \9;
+            line-height: normal;*/
+    }
+
+    #ColorForCheckboxLebel {
+        color: #08c;
+        font-weight: bold;
+        font-size: 11px;
+    }
+</style>
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="@Url.Action("Signout","Login")" style="color:red">Logout</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Add Task</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true)
+                                <fieldset id="TaskForm">
+                                    <input data-val="true" id="UserID" name="UserID" value="@UserId" type="hidden">
+
+                                    <div class="control-group">
+                                        <label class="control-label">Select Project</label>
+                                        <div class="controls">
+                                            <select id="ProjectID" name="ProjectID">
+                                                <option value="0">Select Project</option>
+                                                @foreach (var a in ViewBag.projects)
+                                                {
+                                                    <option value="@a.ProjectID">@a.ProjectName</option>
+                                                }
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Assign To</label>
+                                        <div class="controls">
+                                            @Html.DropDownList("UserID", new SelectList(string.Empty, "Value", "Text"), "Select Resource", new { @id = "UserID" })
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label">Description</label>
+                                        <div class="controls">
+                                            <textarea name="TaskDescription" id="TaskDescription"></textarea>
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label">Due Date</label>
+                                        <div class="controls">
+                                            <input type="date" name="TaskDueDate" id="TaskDueDate" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Priority</label>
+                                        <div class="controls">
+                                            <select id="Priority" name="Priority">
+                                                <option value="0">Select Priority</option>
+                                                @foreach (var a in ViewBag.Prioritys)
+                                                {
+                                                    <option value="@a.ID">@a.Name</option>
+                                                }
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-control">
+                                        <button type="submit" id="saveBtn" class="btn btn-success" style="margin:15px">Save</button>
+                                        <button type="button" id="updateBtn" class="btn btn-success" style="margin:15px">Update</button>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        }
+                    </div>
+                    @if (ViewBag.Msg == 1)
+                    {
+                        <div class="alert alert-success alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Error!</h4>
+                            <h5>Save Success</h5>
+                        </div>
+                    }
+                    @if (ViewBag.Msg == 0)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Error!</h4>
+                            <h5> Some Exception Here, Please try again ! </h5>
+                        </div>
+                    }
+                    @*@if (ViewBag.Msg == 2)
+                        {
+                            <div class="alert alert-error alert-block">
+                                <a class="close" data-dismiss="alert" href="#">×</a>
+                                <h4 class="alert-heading">Error!</h4>
+                                <h5>Already Assigned Project on This User ! </h5>
+                            </div>
+                        }*@
+
+                </div>
+            </div>
+
+            <div class="span11">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Task List</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped" id="myTable">
+
+                            <thead>
+                                <tr>
+                                    <td style="font-size:medium">Project Name</td>
+                                    <td style="font-size:medium">Description</td>
+                                    <td style="font-size:medium">Assign to</td>
+                                    <td style="font-size:medium">Date</td>
+                                    <td style="font-size:medium">Priority</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var task in Model)
+                                {
+
+                                    <tr class="odd gradeX">
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => task.Project.ProjectName)
+
+                                        </td>
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => task.TaskDescription)
+
+                                        </td>
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => task.User.Name)
+
+                                        </td>
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => task.TaskDueDate)
+
+                                        </td>
+
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => task.Priority)
+
+                                        </td>
+
+                                        <td>
+                                            <button type="button" id="editBtn" class="btn" onclick="EditTask(@task.TaskID,this)">Edit</button>
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $("#updateBtn").click(function () {
+                var k = Validation();
+                if (k == true) {
+                    var data = $("#TaskForm").serialize();
+                    $.ajax({
+                        type: "Post",
+                        url: "/Task/UpdateTask",
+                        data: data,
+                        success: function (result) {
+                            if (result == 1) {
+                                alert("Update Success");
+                            }
+                            else {
+                                alert("Exception Please try again");
+                            }
+
+                            window.location.href = "/Task/Index";
+
+
+                        }
+                    })
+                }
+            })
+            //window.location.href = "/Task/Index";
+        })
+        function Validation() {
+            if ( $("#ProjectID").val() == "0") {
+                alert("Please Select Project Name");
+                return false;
+            }
+            else if ($("#UserID").val() == "0") {
+                alert("Please Select User Name");
+                return false;
+            }
+            //else if ($("#TaskDescription").val() == "") {
+            //    alert("Please write Task Discription");
+            //    return false;
+            //}
+            //else if ($("#TaskDueDate").val() == "") {
+            //    alert("Please Select Date");
+            //    return false;
+            //}
+            //else if ($("#Priority").val() == "") {
+            //    alert("Please Select Priority");
+            //    return false;
+            //}
+        };
+    </script>
+    <script type="text/javascript">
+        function EditTask(id, num) {
+
+            $.ajax({
+
+                url: '/Task/EditTask',
+                data: { TaskId: id },
+                type: "post",
+                cache: false,
+                success: function (result) {
+
+                    $("#TaskID").val(result.ID);
+                    //$("#ProjectID").val(result.proID);
+                    //$("#UserID").val(result.UserID);
+                    $("#TaskDescription").val(result.discription);
+                    $("#TaskDueDate").val(result.date);
+                    $("#Priority").val(result.priority);
+
+
+                    $("#saveBtn").hide();
+                    $("#updateBtn").show();
+
+                },
+
+            });
+
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#saveBtn").click(function () {
+
+                if ($("#ProjectID").val() == "" || $("#ProjectID").val() == "0") {
+                    alert("Please Select Project Name");
+                    return false;
+                }
+                else if ($("#UserID").val() == "" || $("#UserID").val() == "0") {
+                    alert("Please Select User Name");
+                    return false;
+                }
+                else if ($("#TaskDescription").val() == "") {
+                    alert("Please write Task Discription");
+                    return false;
+                }
+                else if ($("#TaskDueDate").val() == "") {
+                    alert("Please Select Date");
+                    return false;
+                }
+                else if ($("#Priority").val() == "") {
+                    alert("Please Select Priority");
+                    return false;
+                }
+            })
+            $("#updateBtn").hide();
+        })
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $("#ProjectID").change(function () {
+
+                var ID = $("#ProjectID").val();
+                var select = $("#UserID");
+                select.empty();
+                $.ajax({
+                    url: '/Task/GetResourceByProjectID',
+                    data: { ProjectID: ID },
+                    type: "post",
+                    cache: false,
+                    success: function (response) {
+
+                        if (response != null) {
+                            $.each(response, function (index, itemData) {
+
+                                select.append($('<option/>', {
+
+                                    value: itemData.Value,
+
+                                    text: itemData.Text
+
+                                }));
+
+                            });
+                        }
+                        else {
+
+                            return false;
+                        }
+                    },
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 3000);
+
+        });
+    </script>
+}

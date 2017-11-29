@@ -1,0 +1,82 @@
+﻿@using ProjectManagementSystem.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Item</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Login Form</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        @using (Html.BeginForm("Login", "Login", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
+                        {
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true)
+                                <fieldset id="ProjectForm">
+
+
+                                    <div class="control-group">
+
+                                        <label class="control-label">User Name</label>
+                                        <div class="controls">
+                                            <input type="text" name="Email" id="Email" placeholder="Email address" />
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label">PassWord</label>
+                                        <div class="controls">
+                                            <input type="text" name="Password" id="Password" placeholder="Password" />
+
+                                        </div>
+
+                                    </div>                                    
+                                    <br />
+                                    <div class="form-control">
+                                        <button type="submit" id="loginBtn" class="btn btn-success" style="margin:15px">Login</button>                                        
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        }
+                    </div>
+                    @if (ViewBag.Msg == 1)
+                    {
+                        <div class="alert alert-success alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Error!</h4>
+                            <h5>Save Success</h5>
+                        </div>
+                    }
+                    @if (ViewBag.Msg == 0)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Error!</h4>
+                            <h5> Project Doesn't save ! </h5>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</div>

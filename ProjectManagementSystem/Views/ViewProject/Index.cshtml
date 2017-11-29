@@ -1,0 +1,143 @@
+﻿@model IEnumerable<ProjectManagementSystem.Models.ProjectViewBag>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var UserId = HttpContext.Current.User.Identity.Name;
+    
+
+}
+<style>
+    #levelWidth {
+        width: 129px;
+        font-size: 11px;
+        font-weight: bold;
+        color: #dc7e1b;
+    }
+
+    #ProductSearch {
+        width: 170px;
+        font-size: 15px;
+        height: 40px;
+    }
+
+    #inputMargin {
+        margin-left: 137px;
+    }
+
+    .table th {
+        font-size: 11px;
+        color: #08c;
+    }
+    /*table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }*/
+
+    table tbody td {
+        padding: 5px 10px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 11px;
+        color: #696c6f;
+    }
+
+    table td {
+        text-align: center;
+    }
+
+    input[type="checkbox"] {
+        margin: 0px 3px 0px;
+        /*margin-top: 1px \9;
+            line-height: normal;*/
+    }
+
+    #ColorForCheckboxLebel {
+        color: #08c;
+        font-weight: bold;
+        font-size: 11px;
+    }
+</style>
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a><a href="@Url.Action("Signout","Login")" style="color:red">Logout</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Project List</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped" id="myTable">
+
+                            <thead>
+                                <tr>
+                                    <td style="font-size:medium">Name</td>
+                                    <td style="font-size:medium">Short Name</td>
+                                    <td style="font-size:medium">Status</td>
+                                    <td style="font-size:medium">No of members</td>
+                                    <td style="font-size:medium">No of task</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var project in Model)
+                                {
+
+                                    <tr class="odd gradeX">
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => project.ProjectName)
+
+                                        </td>
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => project.ProjectCode)
+
+                                        </td>
+                                        <td>
+
+
+                                            @Html.DisplayFor(modelItem => project.Status)
+
+                                        </td>
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => project.NoOFMember)
+
+                                        </td>
+
+                                        <td>
+
+                                            @Html.DisplayFor(modelItem => project.NoOFTask)
+
+                                        </td>
+                                        
+                                        <td>
+                                            @*<button type="button" id="editBtn" class="btn" onclick="EditProject(@project.ProjectID,this)">Project Details</button>*@
+                                            @Html.ActionLink("Project Details", "ProjectDetails", new { id =project.ProjectID })
+                                            
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</div>

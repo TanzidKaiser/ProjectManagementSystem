@@ -1,0 +1,230 @@
+﻿
+@{
+    ViewBag.Title = "CommentCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var UserId = HttpContext.Current.User.Identity.Name;
+}
+
+<style>
+    #levelWidth {
+        width: 129px;
+        font-size: 11px;
+        font-weight: bold;
+        color: #dc7e1b;
+    }
+
+    #ProductSearch {
+        width: 170px;
+        font-size: 15px;
+        height: 40px;
+    }
+
+    #inputMargin {
+        margin-left: 137px;
+    }
+
+    .table th {
+        font-size: 11px;
+        color: #08c;
+    }
+    /*table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }*/
+
+    table tbody td {
+        padding: 5px 10px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 11px;
+        color: #696c6f;
+    }
+
+    table td {
+        text-align: center;
+    }
+
+    input[type="checkbox"] {
+        margin: 0px 3px 0px;
+        /*margin-top: 1px \9;
+            line-height: normal;*/
+    }
+
+    #ColorForCheckboxLebel {
+        color: #08c;
+        font-weight: bold;
+        font-size: 11px;
+    }
+</style>
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a><a href="@Url.Action("Signout","Login")" style="color:red">Logout</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Add Comment</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true)
+                                <fieldset id="ProjectForm">
+                                    <input data-val="true" id="UserID" name="UserID" value="@UserId" type="hidden">
+                                    <div class="control-group">
+                                        <label class="control-label">Select Project</label>
+                                        <div class="controls">
+                                            <select id="ProjectID" name="ProjectID" class="span4">
+                                                <option value="0">Select Project</option>
+                                                @foreach (var a in ViewBag.projects)
+                                                {
+                                                    <option value="@a.ProjectID">@a.ProjectName</option>
+                                                }
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Select Task</label>
+                                        <div class="controls">
+                                            @Html.DropDownList("TaskID", new SelectList(string.Empty, "Value", "Text"), "Select Resource", new { @id = "TaskID" })
+                                            @*<select id="TaskID" name="TaskID" class="span4">
+                                                    <option value="0">Select Task</option>
+                                                    @foreach (var a in ViewBag.users)
+                                                    {
+                                                        <option value="@a.UserID">@a.Name</option>
+                                                    }
+
+                                                </select>*@
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+
+                                        <label class="control-label">Comment</label>
+                                        <div class="controls">
+                                            <textarea name="Description" id="Description" class="span6" style="height:100px"></textarea>
+                                        </div>
+
+                                    </div>
+                                    <br />
+                                    <div class="form-control">
+                                        <button type="submit" id="saveBtn" class="btn btn-success" style="margin:15px">Save</button>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        }
+                    </div>
+                    @if (ViewBag.Msg == 1)
+                    {
+                        <div class="alert alert-success alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Error!</h4>
+                            <h5>Save Success</h5>
+                        </div>
+                    }
+                    @if (ViewBag.Msg == 0)
+                    {
+                        <div class="alert alert-error alert-block">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">Success!</h4>
+                            <h5> Some Exception Here, Please try again ! </h5>
+                        </div>
+                    }
+                    @*@if (ViewBag.Msg == 2)
+                        {
+                            <div class="alert alert-error alert-block">
+                                <a class="close" data-dismiss="alert" href="#">×</a>
+                                <h4 class="alert-heading">Error!</h4>
+                                <h5>Already Assigned Project on This User ! </h5>
+                            </div>
+                        }*@
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#ProjectID").change(function () {
+
+                var ID = $("#ProjectID").val();
+                var select = $("#TaskID");
+                select.empty();
+                $.ajax({
+                    url: '/Comment/GetTaskByProjectID',
+                    data: { ProjectID: ID },
+                    type: "post",
+                    cache: false,
+                    success: function (response) {
+
+                        if (response != null) {
+                            $.each(response, function (index, itemData) {
+
+                                select.append($('<option/>', {
+
+                                    value: itemData.Value,
+
+                                    text: itemData.Text
+
+                                }));
+
+                            });
+                        }
+                        else {
+
+                            return false;
+                        }
+                    },
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 3000);
+
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#saveBtn").click(function () {
+
+                if ($("#ProjectID").val() == "" || $("#ProjectID").val() == "0") {
+                    alert("Please Select Project Name");
+                    return false;
+                }
+                else if ($("#TaskID").val() == "" || $("#TaskID").val() == "0") {
+                    alert("Please Select User Name");
+                    return false;
+                }
+
+            })
+
+        })
+    </script>
+}
