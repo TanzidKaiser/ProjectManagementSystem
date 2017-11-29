@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="@Url.Action("Signout","Login")" style="color:red">Logout</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Login Form</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        @using (Html.BeginForm())
+                        {
+
+                            <div class="form-horizontal">
+
+                                <h1>You Have No Permisin to Access this Page !</h1>
+
+
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

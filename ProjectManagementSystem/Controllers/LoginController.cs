@@ -52,6 +52,10 @@ namespace ProjectManagementSystem.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Login");
         }
+        public ActionResult page()
+        {
+            return View();
+        }
 
     }
 }
