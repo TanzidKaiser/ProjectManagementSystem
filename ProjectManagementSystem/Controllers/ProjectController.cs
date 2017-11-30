@@ -17,7 +17,7 @@ namespace ProjectManagementSystem.Controllers
             return View(projects);
         }
         [HttpPost]
-        public ActionResult ProjectCreate(Project model, HttpPostedFileBase file)
+        public ActionResult ProjectCreate(Project model)
         {
             
                 
