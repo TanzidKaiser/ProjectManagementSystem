@@ -59,12 +59,15 @@ namespace ProjectManagementSystem.Controllers
             return View();
 
         }
+
         [Authorize(Roles = "Developer,Project Manager,Team Lead, QA Engineer,UX Engineer")]
         public ActionResult ViewComments()
         {
             ViewBag.projectList = db.Project.ToList();
             return View();
         }
+
+
         [Authorize(Roles = "Developer,Project Manager,Team Lead, QA Engineer,UX Engineer")]
         [HttpPost]
         public ActionResult ViewComments(Task model)
