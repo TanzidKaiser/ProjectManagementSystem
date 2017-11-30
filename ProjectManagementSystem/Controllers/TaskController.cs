@@ -20,13 +20,13 @@ namespace ProjectManagementSystem.Controllers
             return View(TaskList);
         }
         [HttpPost]
-        public ActionResult Index(Task model, string UserID)
+        public ActionResult Index(Task model, string LoginMemberId)
         {
 
             var priorityList = GetPrioritys();
             string aPriorityName = priorityList.First(p => p.ID == Convert.ToInt32(model.Priority)).Name;
 
-            int Id = Convert.ToInt32(UserID);
+            int Id = Convert.ToInt32(LoginMemberId);
             string aUser = db.User.First(p => p.UserID == Id).Name;
 
             model.Priority = aPriorityName;
@@ -85,9 +85,9 @@ namespace ProjectManagementSystem.Controllers
             return Json(returnTask, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult UpdateTask(Task model, string UserID)
+        public JsonResult UpdateTask(Task model, string LoginMemberId)
         {
-            int id = Convert.ToInt32(UserID);
+            int id = Convert.ToInt32(LoginMemberId);
             string aUser = db.User.First(p => p.UserID == id).Name;
 
             var priorityList = GetPrioritys();

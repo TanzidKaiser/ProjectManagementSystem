@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var UserId = HttpContext.Current.User.Identity.Name;
+    var LoginMemberId = HttpContext.Current.User.Identity.Name;
 }
 
 <style>
@@ -81,7 +81,7 @@
 
                                 @Html.ValidationSummary(true)
                                 <fieldset id="TaskForm">
-                                    <input data-val="true" id="UserID" name="UserID" value="@UserId" type="hidden">
+                                    <input data-val="true" id="LoginMemberId" name="LoginMemberId" value="@LoginMemberId" type="hidden">
                                     <input data-val="true" id="TaskID" name="TaskID"  type="hidden">
                                     <div class="control-group">
                                         <label class="control-label">Select Project</label>
