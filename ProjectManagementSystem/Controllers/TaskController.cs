@@ -72,14 +72,15 @@ namespace ProjectManagementSystem.Controllers
 
             aTask.Priority = Convert.ToString(Id);
 
-            var returnTask = new {
+            var returnTask = new
+            {
 
                 ID = aTask.TaskID,
                 //proID = aTask.ProjectID,
                 //UserID = aTask.UserID,
                 discription = aTask.TaskDescription,
                 date = aTask.TaskDueDate,
-                priority = aTask.Priority               
+                priority = aTask.Priority
             };
 
             return Json(returnTask, JsonRequestBehavior.AllowGet);
@@ -123,6 +124,20 @@ namespace ProjectManagementSystem.Controllers
                 userList.Add(new SelectListItem { Text = m.User.Name, Value = Convert.ToString(m.UserID) });
             }
             return Json(userList, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetTaskByProjectID(int ProjectID)
+        {
+            var tasks = db.Task.Where(p => p.ProjectID == ProjectID).ToList();
+
+            List<SelectListItem> TaskList = new List<SelectListItem>();
+            TaskList.Add(new SelectListItem { Text = "Select List", Value = "0" });
+            foreach(var a in tasks)
+            {
+                TaskList.Add(new SelectListItem { Text = a.TaskDescription, Value = Convert.ToString(a.TaskID) });
+            }
+
+            return Json(TaskList, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -84,7 +84,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Project</label>
                                         <div class="controls">
-                                            <select id="Designation" name="ProjectID">
+                                            <select id="ProjectID" name="ProjectID">
                                                 <option value="0">Select Project</option>
                                                 @foreach (var a in ViewBag.projectList)
                                                 {
@@ -97,7 +97,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Select Task</label>
                                         <div class="controls">
-                                            @Html.DropDownList("UserID", new SelectList(string.Empty, "Value", "Text"), "Select Resource", new { @id = "UserIDForTask" })
+                                            @Html.DropDownList("TaskID", new SelectList(string.Empty, "Value", "Text"), "Select Task", new { @id = "TaskIDForComment" })
                                         </div>
                                     </div>
                                     <br />
@@ -170,7 +170,7 @@
 @section scripts{
 
     @Scripts.Render("~/bundles/jqueryval")
-    <script>
+    <script type="text/javascript">
 
         $(document).ready(function () {
 
@@ -180,7 +180,7 @@
                 var select = $("#TaskIDForComment");
                 select.empty();
                 $.ajax({
-                    url: '/Comment/GetTaskByProjectID',
+                    url: '/Task/GetTaskByProjectID',
                     data: { ProjectID: ID },
                     type: "post",
                     cache: false,
