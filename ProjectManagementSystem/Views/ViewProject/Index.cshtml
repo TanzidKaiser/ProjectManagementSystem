@@ -84,7 +84,7 @@
                                     <td style="font-size:medium">Status</td>
                                     <td style="font-size:medium">No of members</td>
                                     <td style="font-size:medium">No of task</td>
-                                    <td></td>
+                                    <td>Action</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -124,7 +124,7 @@
                                         
                                         <td>
                                             @*<button type="button" id="editBtn" class="btn" onclick="EditProject(@project.ProjectID,this)">Project Details</button>*@
-                                            @Html.ActionLink("Project Details", "ProjectDetails", new { id =project.ProjectID })
+                                            @Html.ActionLink("Project  Details", "ProjectDetails", new { id =project.ProjectID })
                                             
                                         </td>
 

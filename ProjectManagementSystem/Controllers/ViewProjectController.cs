@@ -93,6 +93,7 @@ namespace ProjectManagementSystem.Controllers
 
                 TaskList.Add(task);
             }
+            ViewBag.TotalTask = tasks.Count();
             ViewBag.assignMembers = AssignProjectList;
             return View(TaskList);
         }

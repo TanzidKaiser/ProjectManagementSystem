@@ -73,6 +73,7 @@ namespace ProjectManagementSystem.Controllers
         public ActionResult ViewComments(Task model)
         {
             var comments = db.Comment.Where(p => p.ProjectID == model.ProjectID && p.TaskID == model.TaskID).ToList();
+            ViewBag.totalComment  = comments.Count();
             ViewBag.projectList = db.Project.ToList();
             return View(comments);
         }
