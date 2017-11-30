@@ -7,13 +7,13 @@ namespace ProjectManagementSystem.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class userTblCreate : IMigrationMetadata
+    public sealed partial class createDatabaseTbl : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(userTblCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(createDatabaseTbl));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711280352059_userTblCreate"; }
+            get { return "201711300919018_createDatabaseTbl"; }
         }
         
         string IMigrationMetadata.Source

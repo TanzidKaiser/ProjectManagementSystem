@@ -174,29 +174,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711280352059_userTblCreate.cs" />
-    <Compile Include="Migrations\201711280352059_userTblCreate.Designer.cs">
-      <DependentUpon>201711280352059_userTblCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711280557310_ProjectTblCreate.cs" />
-    <Compile Include="Migrations\201711280557310_ProjectTblCreate.Designer.cs">
-      <DependentUpon>201711280557310_ProjectTblCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711281104097_AssignProjectToUserTblCreate.cs" />
-    <Compile Include="Migrations\201711281104097_AssignProjectToUserTblCreate.Designer.cs">
-      <DependentUpon>201711281104097_AssignProjectToUserTblCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711281521377_TaskTableCreate.cs" />
-    <Compile Include="Migrations\201711281521377_TaskTableCreate.Designer.cs">
-      <DependentUpon>201711281521377_TaskTableCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711282000145_CommentTableCreate.cs" />
-    <Compile Include="Migrations\201711282000145_CommentTableCreate.Designer.cs">
-      <DependentUpon>201711282000145_CommentTableCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711291517023_taskTableUpdate.cs" />
-    <Compile Include="Migrations\201711291517023_taskTableUpdate.Designer.cs">
-      <DependentUpon>201711291517023_taskTableUpdate.cs</DependentUpon>
+    <Compile Include="Migrations\201711300919018_createDatabaseTbl.cs" />
+    <Compile Include="Migrations\201711300919018_createDatabaseTbl.Designer.cs">
+      <DependentUpon>201711300919018_createDatabaseTbl.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AssignProjectToUser.cs" />
@@ -280,23 +260,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711280352059_userTblCreate.resx">
-      <DependentUpon>201711280352059_userTblCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711280557310_ProjectTblCreate.resx">
-      <DependentUpon>201711280557310_ProjectTblCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711281104097_AssignProjectToUserTblCreate.resx">
-      <DependentUpon>201711281104097_AssignProjectToUserTblCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711281521377_TaskTableCreate.resx">
-      <DependentUpon>201711281521377_TaskTableCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711282000145_CommentTableCreate.resx">
-      <DependentUpon>201711282000145_CommentTableCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711291517023_taskTableUpdate.resx">
-      <DependentUpon>201711291517023_taskTableUpdate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711300919018_createDatabaseTbl.resx">
+      <DependentUpon>201711300919018_createDatabaseTbl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

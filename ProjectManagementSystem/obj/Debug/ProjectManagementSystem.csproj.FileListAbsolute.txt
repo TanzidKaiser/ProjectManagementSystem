@@ -52,12 +52,8 @@ E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\bin\System.Web.We
 E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\bin\System.Web.WebPages.Razor.xml
 E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\bin\Antlr3.Runtime.pdb
 E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\bin\Newtonsoft.Json.xml
-E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.Migrations.userTblCreate.resources
-E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.Migrations.ProjectTblCreate.resources
-E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.csproj.GenerateResource.Cache
 E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.dll
 E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.pdb
-E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.Migrations.AssignProjectToUserTblCreate.resources
 D:\Nerd Castel\ProjectManagementSystem\ProjectManagementSystem\bin\ApplicationInsights.config
 D:\Nerd Castel\ProjectManagementSystem\ProjectManagementSystem\bin\roslyn\csc.exe
 D:\Nerd Castel\ProjectManagementSystem\ProjectManagementSystem\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -120,8 +116,6 @@ D:\Nerd Castel\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\Project
 D:\Nerd Castel\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.dll
 D:\Nerd Castel\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.pdb
 D:\Nerd Castel\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.Migrations.CommentTableCreate.resources
-E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.Migrations.TaskTableCreate.resources
-E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.Migrations.CommentTableCreate.resources
 E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\bin\Microsoft.AspNet.Identity.Core.dll
 E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\bin\Microsoft.AspNet.Identity.Core.xml
@@ -201,3 +195,5 @@ D:\Nerd Castel\git\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\Pro
 D:\Nerd Castel\git\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.csproj.GenerateResource.Cache
 D:\Nerd Castel\git\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.dll
 D:\Nerd Castel\git\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.pdb
+E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.Migrations.createDatabaseTbl.resources
+E:\Nerd castel\ProjectManagementSystem\ProjectManagementSystem\obj\Debug\ProjectManagementSystem.csproj.GenerateResource.Cache
