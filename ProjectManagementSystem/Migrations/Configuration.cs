@@ -1,5 +1,6 @@
 namespace ProjectManagementSystem.Migrations
 {
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,10 +15,14 @@ namespace ProjectManagementSystem.Migrations
 
         protected override void Seed(ProjectManagementSystem.Models.DatabaseContext context)
         {
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+            context.User.AddOrUpdate(
+                new User { Name="Tanzid", Email="itAdmin@gmail.com",Password="123",Status="Active", Designation= "IT Admin" }
+                );
         }
     }
 }

@@ -3,165 +3,168 @@
     ViewBag.Title = "Index";
 }
 
-<style>
-    #levelWidth {
-        width: 129px;
-        font-size: 11px;
-        font-weight: bold;
-        color: #dc7e1b;
-    }
+    //@Html.Action("Login", "Login");
 
-    #ProductSearch {
-        width: 170px;
-        font-size: 15px;
-        height: 40px;
-    }
 
-    #inputMargin {
-        margin-left: 137px;
-    }
+    <style>
+        #levelWidth {
+            width: 129px;
+            font-size: 11px;
+            font-weight: bold;
+            color: #dc7e1b;
+        }
 
-    .table th {
-        font-size: 11px;
-        color: #08c;
-    }
-    /*table {
+        #ProductSearch {
+            width: 170px;
+            font-size: 15px;
+            height: 40px;
+        }
+
+        #inputMargin {
+            margin-left: 137px;
+        }
+
+        .table th {
+            font-size: 11px;
+            color: #08c;
+        }
+        /*table {
             width: 100%;
             margin: 20px 0;
             border-collapse: collapse;
         }*/
 
-    table tbody td {
-        padding: 5px 10px;
-        text-align: center;
-        font-weight: bold;
-        font-size: 11px;
-        color: #696c6f;
-    }
+        table tbody td {
+            padding: 5px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 11px;
+            color: #696c6f;
+        }
 
-    table td {
-        text-align: center;
-    }
+        table td {
+            text-align: center;
+        }
 
-    input[type="checkbox"] {
-        margin: 0px 3px 0px;
-        /*margin-top: 1px \9;
+        input[type="checkbox"] {
+            margin: 0px 3px 0px;
+            /*margin-top: 1px \9;
             line-height: normal;*/
-    }
+        }
 
-    #ColorForCheckboxLebel {
-        color: #08c;
-        font-weight: bold;
-        font-size: 11px;
-    }
-</style>
+        #ColorForCheckboxLebel {
+            color: #08c;
+            font-weight: bold;
+            font-size: 11px;
+        }
+    </style>
 
-<div id="content">
-    <div id="content-header">
-        <div id="breadcrumb">
-            <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a><a href="@Url.Action("Signout","Login")" style="color:red">Logout</a>
+    <div id="content">
+        <div id="content-header">
+            <div id="breadcrumb">
+                <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a><a href="@Url.Action("Signout", "Login")" style="color:red">Logout</a>
+            </div>
         </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span5">
-                <div class="widget-box">
-                    <div class="widget-title">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span5">
+                    <div class="widget-box">
+                        <div class="widget-title">
 
-                        <span class="icon"> <i class="icon-align-justify"></i> </span>
-                        <h5>Add Resource</h5>
-                    </div>
-                    <div class="widget-content nopadding">
-                        @using (Html.BeginForm(new { enctype = "multipart/form-data" }))
+                            <span class="icon"> <i class="icon-align-justify"></i> </span>
+                            <h5>Add Resource</h5>
+                        </div>
+                        <div class="widget-content nopadding">
+                            @using (Html.BeginForm(new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="form-horizontal">
+
+                                    @Html.ValidationSummary(true)
+                                    <fieldset id="ProjectForm">
+
+                                        <div class="control-group">
+                                            <label class="control-label">Select Project</label>
+                                            <div class="controls">
+                                                <select id="Designation" name="ProjectID">
+                                                    <option value="0">Select Project</option>
+                                                    @foreach (var a in ViewBag.projects)
+                                                    {
+                                                        <option value="@a.ProjectID">@a.ProjectName</option>
+                                                    }
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Select Resource Person</label>
+                                            <div class="controls">
+                                                <select id="Designation" name="UserID">
+                                                    <option value="0">Select Rssource Person</option>
+                                                    @foreach (var a in ViewBag.users)
+                                                    {
+                                                        <option value="@a.UserID">@a.Name</option>
+                                                    }
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="form-control">
+                                            <button type="submit" id="saveBtn" class="btn btn-success" style="margin:15px">Save</button>
+                                        </div>
+                                    </fieldset>
+
+                                </div>
+                            }
+                        </div>
+                        @if (ViewBag.Msg == 1)
                         {
-                            @Html.AntiForgeryToken()
-                            <div class="form-horizontal">
-
-                                @Html.ValidationSummary(true)
-                                <fieldset id="ProjectForm">
-
-                                    <div class="control-group">
-                                        <label class="control-label">Select Project</label>
-                                        <div class="controls">
-                                            <select id="Designation" name="ProjectID">
-                                                <option value="0">Select Project</option>
-                                                @foreach (var a in ViewBag.projects)
-                                                {
-                                                    <option value="@a.ProjectID">@a.ProjectName</option>
-                                                }
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Select Resource Person</label>
-                                        <div class="controls">
-                                            <select id="Designation" name="UserID">
-                                                <option value="0">Select Rssource Person</option>
-                                                @foreach (var a in ViewBag.users)
-                                                {
-                                                    <option value="@a.UserID">@a.Name</option>
-                                                }
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="form-control">
-                                        <button type="submit" id="saveBtn" class="btn btn-success" style="margin:15px">Save</button>
-                                    </div>
-                                </fieldset>
-
+                            <div class="alert alert-success alert-block">
+                                <a class="close" data-dismiss="alert" href="#">×</a>
+                                <h4 class="alert-heading">Error!</h4>
+                                <h5>Save Success</h5>
                             </div>
                         }
+                        @if (ViewBag.Msg == 0)
+                        {
+                            <div class="alert alert-error alert-block">
+                                <a class="close" data-dismiss="alert" href="#">×</a>
+                                <h4 class="alert-heading">Error!</h4>
+                                <h5> Some Exception Here, Please try again ! </h5>
+                            </div>
+                        }
+                        @if (ViewBag.Msg == 2)
+                        {
+                            <div class="alert alert-error alert-block">
+                                <a class="close" data-dismiss="alert" href="#">×</a>
+                                <h4 class="alert-heading">Error!</h4>
+                                <h5>Already Assigned Project on This User ! </h5>
+                            </div>
+                        }
+
+
                     </div>
-                    @if (ViewBag.Msg == 1)
-                    {
-                        <div class="alert alert-success alert-block">
-                            <a class="close" data-dismiss="alert" href="#">×</a>
-                            <h4 class="alert-heading">Error!</h4>
-                            <h5>Save Success</h5>
-                        </div>
-                    }
-                    @if (ViewBag.Msg == 0)
-                    {
-                        <div class="alert alert-error alert-block">
-                            <a class="close" data-dismiss="alert" href="#">×</a>
-                            <h4 class="alert-heading">Error!</h4>
-                            <h5> Some Exception Here, Please try again ! </h5>
-                        </div>
-                    }
-                    @if (ViewBag.Msg == 2)
-                    {
-                        <div class="alert alert-error alert-block">
-                            <a class="close" data-dismiss="alert" href="#">×</a>
-                            <h4 class="alert-heading">Error!</h4>
-                            <h5>Already Assigned Project on This User ! </h5>
-                        </div>
-                    }
-
-
                 </div>
-            </div>
 
-            <div class="span7">
-                <div class="widget-box">
-                    <div class="widget-title">
+                <div class="span7">
+                    <div class="widget-box">
+                        <div class="widget-title">
 
-                        <span class="icon"> <i class="icon-align-justify"></i> </span>
-                        <h5>Project List</h5>
-                    </div>
-                    <div class="widget-content nopadding">
-                        <table class="table table-bordered table-striped" id="myTable">
+                            <span class="icon"> <i class="icon-align-justify"></i> </span>
+                            <h5>Project List</h5>
+                        </div>
+                        <div class="widget-content nopadding">
+                            <table class="table table-bordered table-striped" id="myTable">
 
-                            <thead>
-                                <tr>
-                                    <td style="font-size:medium">Project Name</td>
-                                    <td style="font-size:medium">Resource Person</td>
-                                    <td style="font-size:medium">Degignation</td>
-                                </tr>
-                            </thead>
-                            <tbody>
+                                <thead>
+                                    <tr>
+                                        <td style="font-size:medium">Project Name</td>
+                                        <td style="font-size:medium">Resource Person</td>
+                                        <td style="font-size:medium">Degignation</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     @foreach (var assign in Model)
                                     {
 
@@ -187,24 +190,25 @@
                                         </tr>
                                     }
                                 </tbody>
-                        </table>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@section scripts{
-    <script type="text/javascript">
 
-        $(document).ready(function () {
+    @section scripts{
+        <script type="text/javascript">
 
-            window.setTimeout(function () {
-                $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
-                    $(this).remove();
-                });
-            }, 3000);
+            $(document).ready(function () {
 
-        });
-    </script>
-}
+                window.setTimeout(function () {
+                    $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                        $(this).remove();
+                    });
+                }, 3000);
+
+            });
+        </script>
+    }

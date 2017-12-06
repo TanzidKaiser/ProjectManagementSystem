@@ -32,7 +32,7 @@ namespace ProjectManagementSystem.Controllers
                 if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                  && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                 {
-                    return Redirect(returnUrl);
+                    return RedirectToAction(returnUrl);
                 }
                 else
                 {
