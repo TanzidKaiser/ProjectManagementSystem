@@ -3,7 +3,12 @@
     ViewBag.Title = "page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@if (!(User.Identity.IsAuthenticated))
+{
+    <script>
+        window.location.href = "/Login/Login";
+    </script>
+}
 <<div id="content">
     <div id="content-header">
         <div id="breadcrumb">
